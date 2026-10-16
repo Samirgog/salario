@@ -13,6 +13,8 @@ jobs:
         env:
           VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+          VITE_BOT_USERNAME: ${{ vars.VITE_BOT_USERNAME || secrets.VITE_BOT_USERNAME || 'salario_family_bot' }}
+          VITE_APP_SHORT_NAME: ${{ vars.VITE_APP_SHORT_NAME || secrets.VITE_APP_SHORT_NAME || 'salario' }}
           VITE_BASE_PATH: /${{ github.event.repository.name }}/
       - uses: actions/upload-pages-artifact@v3
         with: { path: dist }
