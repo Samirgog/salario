@@ -48,6 +48,8 @@ supabase link --project-ref <REFERENCE_ID>
 supabase db push
 ```
 
+Миграции `0003_enable_pgcrypto.sql` и `0004_crud_workflow.sql` обязательны: первая включает `pgcrypto` для кодов приглашений, вторая добавляет CRUD для списков, подборок, позиций и целей копилки.
+
 Проверьте таблицы в Dashboard → **Database → Tables**. Если появится ошибка о существующей политике или типе:
 
 ```bash
