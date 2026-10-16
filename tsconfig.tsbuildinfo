@@ -1,0 +1,1 @@
+{"root":["./src/main.tsx","./src/vite-env.d.ts","./src/domain/payday.test.ts","./src/domain/payday.ts","./src/lib/supabase.ts","./vite.config.ts","./vitest.config.ts"],"version":"5.7.3"}
