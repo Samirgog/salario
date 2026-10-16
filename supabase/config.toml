@@ -1,0 +1,4 @@
+[functions.auth-telegram]
+# This endpoint runs before a Supabase user JWT exists.
+# It validates Telegram initData itself and returns a signed Supabase JWT.
+verify_jwt = false

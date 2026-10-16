@@ -119,6 +119,8 @@ supabase secrets list
 
 `SUPABASE_URL` и служебные переменные Supabase Edge Functions получает автоматически. Service role key в браузер не передаётся.
 
+`auth-telegram` специально настроена с `verify_jwt = false` в `supabase/config.toml`: на момент первого запроса JWT пользователя ещё не существует. Telegram-подпись проверяется внутри самой функции. Поэтому после изменения конфигурации нужно заново выполнить `supabase functions deploy auth-telegram`.
+
 ## 7. Локальный запуск через HTTPS
 
 ```bash
