@@ -110,7 +110,8 @@ npm run build
 ```bash
 supabase secrets set \
   BOT_TOKEN='123456789:AA...' \
-  SUPABASE_SERVICE_ROLE_KEY='service-role-key-from-project-settings' \
+  ADMIN_SERVICE_ROLE_KEY='service-role-key-from-project-settings' \
+  PROJECT_JWT_SECRET='jwt-secret-from-project-settings' \
   ALLOWED_ORIGIN='https://<github-user>.github.io'
 supabase functions deploy auth-telegram
 supabase secrets list
@@ -173,12 +174,14 @@ npm run build
 
 В Telegram проверьте открытие Mini App, авторизацию, создание семьи, приглашение второго аккаунта и синхронизацию списков.
 
-## Ограничение текущей версии
+## Текущая схема авторизации и семьи
 
-В репозитории сейчас есть базовая схема БД, UI-каркас, payday-логика и Edge Function `auth-telegram`. Для полного production-релиза ещё нужно подключить вызов `auth-telegram` во frontend, реализовать RPC создания семьи/приглашений и сгенерировать типы:
+Frontend теперь вызывает `auth-telegram`, получает JWT, подписанный `SUPABASE_JWT_SECRET`, и использует его для запросов Supabase. Для создания семьи, приглашений и списков применяются RPC из миграции `0002_household_workflow.sql`.
+
+После применения миграции можно сгенерировать типы:
 
 ```bash
 supabase gen types typescript --linked > src/types/database.ts
 ```
 
-Не публикуйте приложение для реальных пользователей, пока authentication flow не подключён во frontend и не протестирован на двух Telegram-аккаунтах.
+После этого протестируйте authentication flow на двух Telegram-аккаунтах: первый создаёт семью и ссылку, второй открывает Mini App, вставляет код после `invite_` и вступает в семью.
